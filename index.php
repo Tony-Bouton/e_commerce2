@@ -1,10 +1,4 @@
-<?php
-include "product.class.php";
 
-$newProduct= new Product (2,2,2,'coca','boisson gazeuse',50,'boisson gazeuse');
-
-
-?>
 
 
 <!doctype html>
@@ -44,15 +38,25 @@ $newProduct= new Product (2,2,2,'coca','boisson gazeuse',50,'boisson gazeuse');
 </form>
 
 <?php
+include "product.class.php";
+$newProduct= $_POST;
+
+$ttc= function ($tva,$prixHt){
+    return $tva*$prixHt;
+};
+
+
+
 
 $newProduct1='<ul>';
-$newProduct1.='<li>';
+foreach($newProduct as $key=>$value){
+$newProduct1.='<li>'.$key.':'.$value.'</li>';
+}
+$newProduct1.='<li> prix TTC:'.number_format($ttc($_POST['tva'],$_POST['prixHt']),$decimals=2).'</li>';
 
+echo $newProduct1;
+?>
 
-
-
-
-var_dump($newProduct1);?>
 
 </body>
 </html>
